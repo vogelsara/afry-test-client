@@ -33,5 +33,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5001/afry-test/europe-west1/api"
+  "proxy": "http://localhost:5001/afry-test/europe-west1/api",
+  "devDependencies": {
+    "react-router-dom": "^5.2.0"
+  }
 }

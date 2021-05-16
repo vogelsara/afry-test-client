@@ -9,5 +9,3 @@ export default class CreatePeople extends Component {
         )
     }
 }
-
-export default CreatePeople;

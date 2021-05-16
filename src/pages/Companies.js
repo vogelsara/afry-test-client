@@ -9,5 +9,3 @@ export default class Companies extends Component {
         )
     }
 }
-
-export default Companies;

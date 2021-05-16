@@ -9,5 +9,3 @@ export default class PeopleWithoutCompany extends Component {
         )
     }
 }
-
-export default PeopleWithoutCompany;
