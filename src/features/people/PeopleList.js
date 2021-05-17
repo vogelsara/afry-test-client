@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { selectAllPeople, fetchPeople } from './peopleSlice';
 
@@ -23,7 +24,7 @@ export const PeopleList = () => {
     let content
 
     if (peopleStatus === 'loading') {
-        content = <div className="loader">Loading...</div>
+        content = <CircularProgress />
     } else if (peopleStatus === 'succeeded') {
         content = people.map(person => {
             return <ListItemText key={person.personId} primary={person.name} />
