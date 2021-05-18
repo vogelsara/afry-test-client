@@ -23,7 +23,6 @@ export const CreatePersonForm = () => {
     const canSave = name && addPersonStatus === 'idle'
 
     const onSavePersonClicked = async () => {
-        console.log("In the onSavePersonClicked");
         if (canSave) {
             try {
                 setAddPersonStatus('pending')
