@@ -27,7 +27,7 @@ export const PeopleList = () => {
         content = <CircularProgress />
     } else if (peopleStatus === 'succeeded') {
         content = people.map(person => {
-            return <ListItemText key={person.personId} primary={person.name} />
+            return <ListItemText key={person.id} primary={person.name} />
         });
     } else if (peopleStatus === 'failed') {
         content = <div>{error}</div>
