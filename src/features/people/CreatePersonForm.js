@@ -56,7 +56,7 @@ export const CreatePersonForm = () => {
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
             </Select>
-            <Button variant="contained" color="primary" onClick={onSavePersonClicked}>
+            <Button variant="contained" color="primary" onClick={onSavePersonClicked} disabled={!canSave}>
                 Save
             </Button>
         </form>
