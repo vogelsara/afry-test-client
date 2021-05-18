@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-const Link = require("react-router-dom").Link;
-
 
 // Material UI
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
+
+const Link = require("react-router-dom").Link;
 
 export default class Navbar extends Component {
     render() {
