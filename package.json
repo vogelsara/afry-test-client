@@ -17,7 +17,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress": "$(npm bin)/cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,6 +39,7 @@
   "devDependencies": {
     "@material-ui/core": "^4.11.4",
     "axios": "^0.21.1",
+    "cypress": "^7.3.0",
     "react-router-dom": "^5.2.0"
   }
 }
