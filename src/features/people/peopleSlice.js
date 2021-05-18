@@ -1,4 +1,4 @@
-import { createSlice, nanoid, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
@@ -7,18 +7,26 @@ const initialState = {
     error: null
 }
 
-export const fetchPeople = createAsyncThunk('people/fetchPeople', async () => {
-    const response = await axios.get('/people');
-    return response.data;
-})
+export const fetchPeople = createAsyncThunk(
+    'people/fetchPeople', 
+    async () => {
+        const response = await axios.get('/people');
+        return response.data;
+    }
+)
+
+export const addNewPerson = createAsyncThunk(
+    'people/addNewPerson',
+    async addedPerson => {
+        const response = await axios.post('/person', addedPerson)
+        return response.data
+    }
+)
 
 const peopleSlice = createSlice({
     name: 'people',
     initialState,
     reducers: {
-        personAdded(state, action) {
-            state.people.push(action.payload)
-        }
     },
     extraReducers: {
         [fetchPeople.pending]: (state, action) => {
@@ -31,6 +39,9 @@ const peopleSlice = createSlice({
         [fetchPeople.rejected]: (state, action) => {
             state.status = 'failed'
             state.error = action.error.message
+        },
+        [addNewPerson.fulfilled]: (state, action) => {
+            state.people = state.people.concat(action.payload)
         }
     }
 })

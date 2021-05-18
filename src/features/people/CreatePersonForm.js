@@ -6,33 +6,40 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 
 import { useDispatch } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit';
-import { personAdded } from './peopleSlice';
+import { unwrapResult } from '@reduxjs/toolkit';
+import { addNewPerson } from './peopleSlice';
 
 export const CreatePersonForm = () => {
 
     const [name, setName] = useState('');
-    const [company, setCompany] = useState('');
+    const [companyId, setCompanyId] = useState('');
+    const [addPersonStatus, setAddPersonStatus] = useState('idle');
 
     const dispatch = useDispatch();
 
     const onNameChanged = e => setName(e.target.value);
-    const onComapnyChanged = e => setCompany(e.target.value);
+    const onComapnyChanged = e => setCompanyId(e.target.value);
 
-    const onSavePersonClicked = () => {
-        if (name) {
-            dispatch(
-                personAdded({
-                    id: nanoid(),
-                    name,
-                    company
-                })
-            )
+    const canSave = name && addPersonStatus === 'idle'
 
-            setName('');
-            setCompany('');
+    const onSavePersonClicked = async () => {
+        console.log("In the onSavePersonClicked");
+        if (canSave) {
+            try {
+                setAddPersonStatus('pending')
+                const resultAction = await dispatch(
+                    addNewPerson({ name, companyId })
+                )
+                unwrapResult(resultAction)
+                setName('')
+                setCompanyId('')
+            } catch (err) {
+                console.error('Failed to save person: ', err)
+            } finally {
+                setAddPersonStatus('idle')
+            }
         }
-    }
+    }   
 
     return (
         <form noValidate>
@@ -42,7 +49,7 @@ export const CreatePersonForm = () => {
                 labelId="person-company-select"
                 id="demo-simple-select"
                 onChange={onComapnyChanged}
-                value={company}
+                value={companyId}
             >
                 <MenuItem value={0}>None</MenuItem>
                 <MenuItem value={10}>Ten</MenuItem>
