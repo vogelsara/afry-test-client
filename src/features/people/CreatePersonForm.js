@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField'
+import InputLabel from '@material-ui/core/InputLabel'
+import Button from '@material-ui/core/Button'
 
-import { useDispatch } from 'react-redux';
-import { unwrapResult } from '@reduxjs/toolkit';
-import { addNewPerson } from './peopleSlice';
-import CompanySelect from '../companies/CompanySelect';
+import { useDispatch } from 'react-redux'
+import { unwrapResult } from '@reduxjs/toolkit'
+import { addNewPerson } from './peopleSlice'
+import CompanySelect from '../companies/CompanySelect'
 
 export const CreatePersonForm = () => {
+    const [name, setName] = useState('')
+    const [companyId, setCompanyId] = useState('')
+    const [addPersonStatus, setAddPersonStatus] = useState('idle')
 
-    const [name, setName] = useState('');
-    const [companyId, setCompanyId] = useState('');
-    const [addPersonStatus, setAddPersonStatus] = useState('idle');
-    
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
-    const onNameChanged = e => setName(e.target.value);
-    const onCompanyIdChanged = companyId => setCompanyId(companyId);
+    const onNameChanged = (e) => setName(e.target.value)
+    const onCompanyIdChanged = (companyId) => setCompanyId(companyId)
 
     const canSave = name && addPersonStatus === 'idle'
 
@@ -26,9 +25,7 @@ export const CreatePersonForm = () => {
         if (canSave) {
             try {
                 setAddPersonStatus('pending')
-                const resultAction = dispatch(
-                    addNewPerson({ name, companyId })
-                )
+                const resultAction = dispatch(addNewPerson({ name, companyId }))
                 unwrapResult(resultAction)
                 setName('')
                 setCompanyId('')
@@ -38,18 +35,31 @@ export const CreatePersonForm = () => {
                 setAddPersonStatus('idle')
             }
         }
-    }   
-    
+    }
+
     return (
         <form noValidate>
-            <TextField id="person-name-input" label="Name" onChange={onNameChanged} value={name} />
+            <TextField
+                id="person-name-input"
+                label="Name"
+                onChange={onNameChanged}
+                value={name}
+            />
             <InputLabel id="person-company-select">Company</InputLabel>
-            <CompanySelect value={companyId} onCompanyIdChanged={onCompanyIdChanged} />
-            <Button variant="contained" color="primary" onClick={onSavePersonClicked} disabled={!canSave}>
+            <CompanySelect
+                value={companyId}
+                onCompanyIdChanged={onCompanyIdChanged}
+            />
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={onSavePersonClicked}
+                disabled={!canSave}
+            >
                 Save
             </Button>
         </form>
     )
 }
 
-export default CreatePersonForm;
+export default CreatePersonForm

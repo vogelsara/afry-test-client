@@ -1,23 +1,23 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
 
 const initialState = {
     companies: [],
     status: 'idle',
-    error: null
+    error: null,
 }
 
 export const fetchCompanies = createAsyncThunk(
     'companies/fetchCompanies',
     async () => {
-        const response = await axios.get('/companies');
-        return response.data;
+        const response = await axios.get('/companies')
+        return response.data
     }
 )
 
 export const addNewCompany = createAsyncThunk(
     'companies/createNewCompany',
-    async addedCompany => {
+    async (addedCompany) => {
         const response = await axios.post('/company', addedCompany)
         return response.data
     }
@@ -26,8 +26,7 @@ export const addNewCompany = createAsyncThunk(
 const companiesSlice = createSlice({
     name: 'companies',
     initialState,
-    reducers: {
-    },
+    reducers: {},
     extraReducers: {
         [fetchCompanies.pending]: (state, action) => {
             state.status = 'loading'
@@ -42,12 +41,12 @@ const companiesSlice = createSlice({
         },
         [addNewCompany.fulfilled]: (state, action) => {
             state.companies = state.companies.concat(action.payload)
-        }
-    }
+        },
+    },
 })
 
 export const { companyAdded } = companiesSlice.actions
 
 export default companiesSlice.reducer
 
-export const selectAllCompanies = state => state.companies.companies
+export const selectAllCompanies = (state) => state.companies.companies

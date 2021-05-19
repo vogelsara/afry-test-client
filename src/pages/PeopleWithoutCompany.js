@@ -6,7 +6,7 @@ export default class PeopleWithoutCompany extends Component {
         return (
             <div>
                 <h1>People without company</h1>
-                <PeopleList/>
+                <PeopleList />
             </div>
         )
     }

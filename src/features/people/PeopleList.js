@@ -1,38 +1,38 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { selectAllPeople, fetchPeople, editPerson } from './peopleSlice';
+import { selectAllPeople, fetchPeople, editPerson } from './peopleSlice'
 
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import CompanySelect from '../companies/CompanySelect';
+import { makeStyles } from '@material-ui/core/styles'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import PersonRoundedIcon from '@material-ui/icons/PersonRounded'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import CompanySelect from '../companies/CompanySelect'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-  nested: {
-    paddingLeft: theme.spacing(4),
-  },
-}));
+    root: {
+        width: '100%',
+        maxWidth: 360,
+        backgroundColor: theme.palette.background.paper,
+    },
+    nested: {
+        paddingLeft: theme.spacing(4),
+    },
+}))
 
 /**
  * Renders a list of people (or loading or error). Every person has a company select where you can update the person's company
  */
 export const PeopleList = () => {
-    const classes = useStyles();
-    const dispatch = useDispatch();
+    const classes = useStyles()
+    const dispatch = useDispatch()
 
-    const people = useSelector(selectAllPeople);
-    const peopleStatus = useSelector(state => state.people.status);
-    const error = useSelector(state => state.people.error);
+    const people = useSelector(selectAllPeople)
+    const peopleStatus = useSelector((state) => state.people.status)
+    const error = useSelector((state) => state.people.error)
 
     useEffect(() => {
         if (peopleStatus === 'idle') {
@@ -42,34 +42,39 @@ export const PeopleList = () => {
 
     const onCompanyIdChanged = (companyId, personId) => {
         dispatch(
-            editPerson(
-                {
-                    id: personId,
-                    data: {
-                        companyId: companyId 
-                    }
-                }
-            )
-        );
-    };
+            editPerson({
+                id: personId,
+                data: {
+                    companyId: companyId,
+                },
+            })
+        )
+    }
 
     let content
 
     if (peopleStatus === 'loading') {
         content = <CircularProgress />
     } else if (peopleStatus === 'succeeded') {
-        const peopleWithoutCompany = people.filter(person => person.companyId === '');
-        content = peopleWithoutCompany.map(person => {
-            return ( 
+        const peopleWithoutCompany = people.filter(
+            (person) => person.companyId === ''
+        )
+        content = peopleWithoutCompany.map((person) => {
+            return (
                 <ListItem key={person.id} button className={classes.nested}>
                     <ListItemIcon>
-                    <PersonRoundedIcon />
+                        <PersonRoundedIcon />
                     </ListItemIcon>
                     <ListItemText primary={person.name} />
-                    <CompanySelect value='' onCompanyIdChanged={(companyId) => onCompanyIdChanged(companyId, person.id)} />
+                    <CompanySelect
+                        value=""
+                        onCompanyIdChanged={(companyId) =>
+                            onCompanyIdChanged(companyId, person.id)
+                        }
+                    />
                 </ListItem>
-            );
-        });
+            )
+        })
     } else if (peopleStatus === 'failed') {
         content = <div>{error}</div>
     }
@@ -80,11 +85,11 @@ export const PeopleList = () => {
                 component="nav"
                 aria-labelledby="nested-list-subheader"
                 className={classes.root}
-            >      
+            >
                 {content}
             </List>
         </div>
     )
 }
 
-export default PeopleList;
+export default PeopleList

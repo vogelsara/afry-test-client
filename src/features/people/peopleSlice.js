@@ -1,41 +1,37 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
 
 const initialState = {
     people: [],
     status: 'idle',
-    error: null
+    error: null,
 }
 
-export const fetchPeople = createAsyncThunk(
-    'people/fetchPeople', 
-    async () => {
-        const response = await axios.get('/people');
-        return response.data;
-    }
-)
+export const fetchPeople = createAsyncThunk('people/fetchPeople', async () => {
+    const response = await axios.get('/people')
+    return response.data
+})
 
 export const addNewPerson = createAsyncThunk(
     'people/addNewPerson',
-    async addedPerson => {
-        const response = await axios.post('/person', addedPerson);
-        return response.data;
+    async (addedPerson) => {
+        const response = await axios.post('/person', addedPerson)
+        return response.data
     }
 )
 
 export const editPerson = createAsyncThunk(
     'people/editPerson',
-    async person => {
-        const response = await axios.put(`/person/${person.id}`, person.data);
-        return response.data;
+    async (person) => {
+        const response = await axios.put(`/person/${person.id}`, person.data)
+        return response.data
     }
 )
 
 const peopleSlice = createSlice({
     name: 'people',
     initialState,
-    reducers: {
-    },
+    reducers: {},
     extraReducers: {
         [fetchPeople.pending]: (state, action) => {
             state.status = 'loading'
@@ -52,19 +48,19 @@ const peopleSlice = createSlice({
             state.people = state.people.concat(action.payload)
         },
         [editPerson.fulfilled]: (state, action) => {
-            state.people = state.people.map(person => {
+            state.people = state.people.map((person) => {
                 if (person.id === action.payload.id) {
-                    return action.payload;
+                    return action.payload
                 } else {
-                    return person;
+                    return person
                 }
-            });
+            })
         },
-    }
+    },
 })
 
 export const { personAdded } = peopleSlice.actions
 
 export default peopleSlice.reducer
 
-export const selectAllPeople = state => state.people.people
+export const selectAllPeople = (state) => state.people.people

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import CreatePersonForm from '../features/people/CreatePersonForm';
+import React, { Component } from 'react'
+import CreatePersonForm from '../features/people/CreatePersonForm'
 
 export default class CreatePeople extends Component {
     render() {
