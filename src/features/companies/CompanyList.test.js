@@ -5,7 +5,7 @@ import { store } from '../../app/store';
 import CompanyList from './CompanyList';
 
 test('renders without error', () => {
-    const { getByText } = render(
+    render(
         <Provider store={store}>
             <CompanyList />
         </Provider>

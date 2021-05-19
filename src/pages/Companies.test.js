@@ -5,7 +5,7 @@ import { store } from '../app/store';
 import Companies from './Companies';
 
 test('renders without error', () => {
-    const { getByText } = render(
+    render(
         <Provider store={store}>
             <Companies />
         </Provider>

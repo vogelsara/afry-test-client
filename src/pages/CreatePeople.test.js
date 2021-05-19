@@ -5,7 +5,7 @@ import { store } from '../app/store';
 import CreatePeople from './CreatePeople';
 
 test('renders without error', () => {
-    const { getByText } = render(
+    render(
         <Provider store={store}>
             <CreatePeople />
         </Provider>
