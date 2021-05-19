@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
-import { useSelector, useDispatch } from 'react-redux'
 import { selectAllCompanies, fetchCompanies } from './companiesSlice'
 
 /**

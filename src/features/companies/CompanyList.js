@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { selectAllCompanies, fetchCompanies } from './companiesSlice'
-import { selectAllPeople, fetchPeople, editPerson } from '../people/peopleSlice'
-
-import CompanyListElement from './CompanyListElement'
-
 import { makeStyles } from '@material-ui/core/styles'
 import ListSubheader from '@material-ui/core/ListSubheader'
 import List from '@material-ui/core/List'
 import CircularProgress from '@material-ui/core/CircularProgress'
+
+import { selectAllCompanies, fetchCompanies } from './companiesSlice'
+import { selectAllPeople, fetchPeople, editPerson } from '../people/peopleSlice'
+import CompanyListElement from './CompanyListElement'
 
 const useStyles = makeStyles((theme) => ({
     root: {

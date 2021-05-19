@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { unwrapResult } from '@reduxjs/toolkit'
 
 import TextField from '@material-ui/core/TextField'
 import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button'
 
-import { useDispatch } from 'react-redux'
-import { unwrapResult } from '@reduxjs/toolkit'
 import { addNewPerson } from './peopleSlice'
 import CompanySelect from '../companies/CompanySelect'
 

@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { selectAllPeople, fetchPeople, editPerson } from './peopleSlice'
-
 import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -10,6 +8,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded'
 import CircularProgress from '@material-ui/core/CircularProgress'
+
+import { selectAllPeople, fetchPeople, editPerson } from './peopleSlice'
 import CompanySelect from '../companies/CompanySelect'
 
 const useStyles = makeStyles((theme) => ({

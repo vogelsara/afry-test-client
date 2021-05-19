@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { unwrapResult } from '@reduxjs/toolkit'
+
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
-import { useDispatch } from 'react-redux'
-import { unwrapResult } from '@reduxjs/toolkit'
 import { addNewCompany } from './companiesSlice'
 
 export const CreateCompanyForm = () => {
