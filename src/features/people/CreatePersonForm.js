@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { addNewPerson } from './peopleSlice';
-import { selectAllCompanies, fetchCompanies } from '../companies/companiesSlice';
-
+import CompanySelect from '../companies/CompanySelect';
 
 export const CreatePersonForm = () => {
 
@@ -21,18 +17,8 @@ export const CreatePersonForm = () => {
     
     const dispatch = useDispatch();
 
-    const companies = useSelector(selectAllCompanies);
-    const companiesStatus = useSelector(state => state.companies.status);
-    const error = useSelector(state => state.companies.error);
-
-    useEffect(() => {
-        if (companiesStatus === 'idle') {
-            dispatch(fetchCompanies())
-        }
-    }, [companiesStatus, dispatch])
-
     const onNameChanged = e => setName(e.target.value);
-    const onCompanyChanged = e => setCompanyId(e.target.value);
+    const onCompanyIdChanged = companyId => setCompanyId(companyId);
 
     const canSave = name && addPersonStatus === 'idle'
 
@@ -40,7 +26,7 @@ export const CreatePersonForm = () => {
         if (canSave) {
             try {
                 setAddPersonStatus('pending')
-                const resultAction = await dispatch(
+                const resultAction = dispatch(
                     addNewPerson({ name, companyId })
                 )
                 unwrapResult(resultAction)
@@ -53,39 +39,12 @@ export const CreatePersonForm = () => {
             }
         }
     }   
-
-    let companySelection;
-
-    if (companiesStatus === 'loading') {
-        companySelection = <CircularProgress />
-    } else if (companiesStatus === 'succeeded') {
-        const companyOptions = [
-            {
-                id: '',
-                name: 'None'
-            }
-        ].concat(companies);
-        const companyListMarkup = companyOptions.map(company => {
-            return <MenuItem value={company.id}>{company.name}</MenuItem>
-        })
-        companySelection = 
-        <Select
-            labelId="person-company-select"
-            id="demo-simple-select"
-            onChange={onCompanyChanged}
-            value={companyId}
-        >
-            {companyListMarkup}
-        </Select>
-    } else if (companiesStatus === 'failed') {
-        companySelection = <div>{error}</div>
-    }
     
     return (
         <form noValidate>
             <TextField id="person-name-input" label="Name" onChange={onNameChanged} value={name} />
             <InputLabel id="person-company-select">Company</InputLabel>
-            {companySelection}
+            <CompanySelect value={companyId} onCompanyIdChanged={onCompanyIdChanged} />
             <Button variant="contained" color="primary" onClick={onSavePersonClicked} disabled={!canSave}>
                 Save
             </Button>
