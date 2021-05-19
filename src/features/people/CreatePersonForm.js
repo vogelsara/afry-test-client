@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
@@ -80,7 +81,6 @@ export const CreatePersonForm = () => {
         companySelection = <div>{error}</div>
     }
     
-
     return (
         <form noValidate>
             <TextField id="person-name-input" label="Name" onChange={onNameChanged} value={name} />
@@ -91,7 +91,6 @@ export const CreatePersonForm = () => {
             </Button>
         </form>
     )
-
 }
 
 export default CreatePersonForm;

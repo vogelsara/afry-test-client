@@ -26,7 +26,8 @@ export const PeopleList = () => {
     if (peopleStatus === 'loading') {
         content = <CircularProgress />
     } else if (peopleStatus === 'succeeded') {
-        content = people.map(person => {
+        const peopleWithoutCompany = people.filter(person => person.companyId === '');
+        content = peopleWithoutCompany.map(person => {
             return <ListItemText key={person.id} primary={person.name} />
         });
     } else if (peopleStatus === 'failed') {
