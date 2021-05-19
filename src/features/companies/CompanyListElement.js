@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
  * 
  * @param companyName string
  * @param people list, where elements must have and id and a name
+ * @param onTrashClick callable function with the parameter of the personId. Is called when user clicks on the trash icon next to the user's name
  */
 export const CompanyList = (props) => {
     const classes = useStyles();
@@ -47,7 +48,11 @@ export const CompanyList = (props) => {
                 </ListItemIcon>
                 <ListItemText primary={person.name} />
                 <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => {props.onTrashClick(person.id)}}
+                    >
                         <DeleteIcon />
                     </IconButton>
                 </ListItemSecondaryAction>

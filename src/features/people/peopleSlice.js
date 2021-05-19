@@ -18,8 +18,16 @@ export const fetchPeople = createAsyncThunk(
 export const addNewPerson = createAsyncThunk(
     'people/addNewPerson',
     async addedPerson => {
-        const response = await axios.post('/person', addedPerson)
-        return response.data
+        const response = await axios.post('/person', addedPerson);
+        return response.data;
+    }
+)
+
+export const editPerson = createAsyncThunk(
+    'people/editPerson',
+    async person => {
+        const response = await axios.put(`/person/${person.id}`, person.data);
+        return response.data;
     }
 )
 
@@ -42,7 +50,16 @@ const peopleSlice = createSlice({
         },
         [addNewPerson.fulfilled]: (state, action) => {
             state.people = state.people.concat(action.payload)
-        }
+        },
+        [editPerson.fulfilled]: (state, action) => {
+            state.people = state.people.map(person => {
+                if (person.id === action.payload.id) {
+                    return action.payload;
+                } else {
+                    return person;
+                }
+            });
+        },
     }
 })
 

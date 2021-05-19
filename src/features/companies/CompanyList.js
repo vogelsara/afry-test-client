@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectAllCompanies, fetchCompanies } from './companiesSlice';
-import { selectAllPeople, fetchPeople } from '../people/peopleSlice';
+import { selectAllPeople, fetchPeople, editPerson } from '../people/peopleSlice';
 
 import CompanyListElement from './CompanyListElement';
 
@@ -42,7 +42,20 @@ export const CompanyList = () => {
         if (peopleStatus === 'idle') {
             dispatch(fetchPeople())
         }
-    }, [companiesStatus, peopleStatus, dispatch])
+    }, [companiesStatus, peopleStatus, dispatch]);
+
+    const handleTrashClick = (personId) => {
+        dispatch(
+            editPerson(
+                {
+                    id: personId,
+                    data: {
+                        companyId: '' 
+                    }
+                }
+            )
+        );
+    };
 
     let content;
 
@@ -51,7 +64,7 @@ export const CompanyList = () => {
     } else if (companiesStatus === 'succeeded' && peopleStatus === 'succeeded') {
         content = companies.map(company => {
             const peopleForThisCompany = people.filter(person => {return person.companyId === company.id});
-            return <CompanyListElement company={company} people={peopleForThisCompany} />
+            return <CompanyListElement company={company} people={peopleForThisCompany} onTrashClick={handleTrashClick} />
         });
     } else if (companiesStatus === 'failed' || peopleStatus === 'failed') {
         content = <div>{companyError}<br />{peopleError}</div>
