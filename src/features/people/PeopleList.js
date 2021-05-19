@@ -1,14 +1,29 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import CircularProgress from '@material-ui/core/CircularProgress';
-
 import { selectAllPeople, fetchPeople } from './peopleSlice';
 
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
+  nested: {
+    paddingLeft: theme.spacing(4),
+  },
+}));
+
 export const PeopleList = () => {
+    const classes = useStyles();
     const dispatch = useDispatch();
 
     const people = useSelector(selectAllPeople);
@@ -28,7 +43,14 @@ export const PeopleList = () => {
     } else if (peopleStatus === 'succeeded') {
         const peopleWithoutCompany = people.filter(person => person.companyId === '');
         content = peopleWithoutCompany.map(person => {
-            return <ListItemText key={person.id} primary={person.name} />
+            return ( 
+                <ListItem key={person.id} button className={classes.nested}>
+                    <ListItemIcon>
+                    <PersonRoundedIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={person.name} />
+                </ListItem>
+            );
         });
     } else if (peopleStatus === 'failed') {
         content = <div>{error}</div>
@@ -36,10 +58,12 @@ export const PeopleList = () => {
 
     return (
         <div>
-            <List>
-                <ListItem>
-                    {content}
-                </ListItem>
+            <List
+                component="nav"
+                aria-labelledby="nested-list-subheader"
+                className={classes.root}
+            >      
+                {content}
             </List>
         </div>
     )
