@@ -38,6 +38,7 @@
   "proxy": "http://localhost:5001/afry-test/europe-west1/api",
   "devDependencies": {
     "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
     "cypress": "^7.3.0",
     "react-router-dom": "^5.2.0"
