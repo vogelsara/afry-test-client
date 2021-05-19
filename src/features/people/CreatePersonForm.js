@@ -32,7 +32,7 @@ export const CreatePersonForm = () => {
     }, [companiesStatus, dispatch])
 
     const onNameChanged = e => setName(e.target.value);
-    const onComapnyChanged = e => setCompanyId(e.target.value);
+    const onCompanyChanged = e => setCompanyId(e.target.value);
 
     const canSave = name && addPersonStatus === 'idle'
 
@@ -72,7 +72,7 @@ export const CreatePersonForm = () => {
         <Select
             labelId="person-company-select"
             id="demo-simple-select"
-            onChange={onComapnyChanged}
+            onChange={onCompanyChanged}
             value={companyId}
         >
             {companyListMarkup}
