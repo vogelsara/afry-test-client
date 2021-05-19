@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * Renders a list of people (or loading or error). Every person has a company select where you can update the person's company
+ */
 export const PeopleList = () => {
     const classes = useStyles();
     const dispatch = useDispatch();

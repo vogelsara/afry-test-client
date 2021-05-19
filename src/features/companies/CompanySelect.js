@@ -7,6 +7,18 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectAllCompanies, fetchCompanies } from './companiesSlice';
 
+/**
+ * Renders a Select with all the companies plus a 'None' option in the beginning.
+ * 
+ * The 'None' option has the value of an empty string. You can use it as a companyId to detach a person from the company.
+ * 
+ * The component doesn't store it's value as a state, the client has to provide it using props and handle the change through callback.
+ * 
+ * Renders to loader when loading and error on error.
+ * 
+ * @param value ID of the company selected
+ * @param onCompanyIdChanged callback, which is called when the value changes. ID of the selected company is passed in as argument 
+ */
 export const CompanySelect = (props) => {    
     const dispatch = useDispatch();
 

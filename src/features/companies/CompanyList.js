@@ -22,6 +22,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * Renders a list of companies.
+ * 
+ * For every company it has an expandable sublist containing the people who belong to this company.
+ * 
+ * For every person there is a trash icon which sets the companyId of that person to empty string, removing them from this company. 
+ * 
+ * Renders to loader when people or companies are loading and error on error of any of these.
+ */
 export const CompanyList = () => {
     const classes = useStyles();
   
