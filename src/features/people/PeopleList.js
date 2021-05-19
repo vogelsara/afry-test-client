@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectAllPeople, fetchPeople } from './peopleSlice';
+import { selectAllPeople, fetchPeople, editPerson } from './peopleSlice';
 
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -10,6 +10,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import CompanySelect from '../companies/CompanySelect';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,6 +37,19 @@ export const PeopleList = () => {
         }
     }, [peopleStatus, dispatch])
 
+    const onCompanyIdChanged = (companyId, personId) => {
+        dispatch(
+            editPerson(
+                {
+                    id: personId,
+                    data: {
+                        companyId: companyId 
+                    }
+                }
+            )
+        );
+    };
+
     let content
 
     if (peopleStatus === 'loading') {
@@ -49,6 +63,7 @@ export const PeopleList = () => {
                     <PersonRoundedIcon />
                     </ListItemIcon>
                     <ListItemText primary={person.name} />
+                    <CompanySelect value='' onCompanyIdChanged={(companyId) => onCompanyIdChanged(companyId, person.id)} />
                 </ListItem>
             );
         });
