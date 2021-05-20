@@ -1,6 +1,6 @@
 # AFRY Test App Client
 
-This project is part of my technical recruitment task for AFRY.
+This project is part of my technical recruitment task for [AFRY](https://afry.com/sv).
 
 You can visit the app live at https://afry-test.web.app/
 
@@ -48,7 +48,7 @@ I separated the frontend and the backend, because these can be 2 independently d
 
 ### Backend
 
-The backend code esposes a REST API publicly to create and read companies and people and modify people.
+The backend code exsposes a REST API publicly to create and read companies and people and modify people.
 
 The backend is built in [NodeJS](https://nodejs.org/en/). I used [express framework](https://expressjs.com/) to create API endpoints.
 
@@ -73,7 +73,7 @@ During the development, (among other tools) [ESLint](https://eslint.org/) and [P
 ### What was important to me
 
 -   To show the whole suite, and my knowledge about React, Redux, testing, nice code structure
--   To minimize the number of API requests with the help of Redux. Both the customer list and the company list is used by deveral components. The first one using them loads the data and the rest can use the stored lists. Also I could make an API endpoint to query people for specific companies, but I decided to request the whole list once and do the filtering on the client side for better performance and offload the server. (Firebase is charged for the computing time of the Cloud Functions and database reads/writes.)
+-   To minimize the number of API requests with the help of Redux. Both the customer list and the company list is used by several components. The first one using them loads the data and the rest can use the stored lists. Also I could make an API endpoint to query people for specific companies, but I decided to request the whole list once and do the filtering on the client side for better performance and offload the server. (Firebase is charged for the computing time of the Cloud Functions and database reads/writes.)
 -   To have different levels of automated tests
 -   To nicely document the project both the docstring (where needed) and the README level
 -   To have a well versioned project where it's not only easy to track how the code evolved, but Git is also an aid for me in the development
@@ -81,10 +81,12 @@ During the development, (among other tools) [ESLint](https://eslint.org/) and [P
 -   To write clean, readable, extendable and easy to debug code
 -   To write fully functioning code, which provides the solution to the task as a minimum
 
-### What was not important to me
+### What was NOT important to me
+
+I made a decision to focus less on certain areas.
 
 -   To have full test coverage. It was more important to show I am able to write tests in different levels and know different frameworks than to actually cover every functionality.
--   To have a unique and nice UI. I am able to work well with CSS, design my own look and feel and build responsive and good looking interfaces. It was a concious decision in this project to concentrate on functionality and use Material UI elements as they are.
+-   To have a unique and nice UI. I am able to work well with CSS, design my own look and feel and build responsive and good looking interfaces. But in this specific project it was a concious decision to concentrate on functionality and use Material UI elements as they are.
 -   To build the perfect product. I could add API endpoints to modify companies, delete people or companies, add buttons for these.
 
 ## How to try
