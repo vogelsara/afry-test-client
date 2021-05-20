@@ -2,6 +2,8 @@
 
 This project is part of my technical recruitment task for AFRY.
 
+You can visit the app live at https://afry-test.web.app/
+
 I created 2 separate repositories for the frontend and backend code. This is the code for the frontend. For simplicity I wrote one single README for both repositories here. You can find the repository for the backend code [here](https://github.com/vogelsara/afry-app-functions).
 
 ## Description of the task
@@ -71,6 +73,7 @@ During the development, (among other tools) [ESLint](https://eslint.org/) and [P
 ### What was important to me
 
 -   To show the whole suite, and my knowledge about React, Redux, testing, nice code structure
+-   To minimize the number of API requests with the help of Redux. Both the customer list and the company list is used by deveral components. The first one using them loads the data and the rest can use the stored lists. Also I could make an API endpoint to query people for specific companies, but I decided to request the whole list once and do the filtering on the client side for better performance and offload the server. (Firebase is charged for the computing time of the Cloud Functions and database reads/writes.)
 -   To have different levels of automated tests
 -   To nicely document the project both the docstring (where needed) and the README level
 -   To have a well versioned project where it's not only easy to track how the code evolved, but Git is also an aid for me in the development
@@ -96,7 +99,7 @@ It's a bit harder to run the backend locally, because of the nature of Firebase.
 
 #### Run the backend locally
 
-You need to have Firebase CLY installed. If you don't have it, you can
+You need to have Firebase CLI installed. If you don't have it, you can
 
 `npm install -g firebase-tools`
 
@@ -104,11 +107,11 @@ Clone the backend repository:
 
 `git clone https://github.com/vogelsara/afry-app-functions`
 
-Go to the folder
+Go to the functions folder
 
-`cd afry-app-functions`
+`cd afry-app-functions/functions`
 
-You need to `npm install` in the `functions` folder.
+You need to `npm install` (in the `functions` folder!).
 
 Start the emulators:
 
@@ -157,6 +160,8 @@ and can open Cypress and run it's end-to-end test by
 Note that the Cypress test need both the backend's emulators and the frontend's live server running. You need to start these manually.
 
 ## API documentation
+
+This documentation contains example data.
 
 Base URL: https://europe-west1-afry-test.cloudfunctions.net/api
 
@@ -269,7 +274,7 @@ Returns the created resource:
 
 ## Room for improvement
 
-There are many thing which I would do better in a real life project.
+There are many things that I would do better in a real life project.
 
 ### Testing
 
