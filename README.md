@@ -46,9 +46,9 @@ I separated the frontend and the backend, because these can be 2 independently d
 
 ### Backend
 
-The backend code esposes a REST API publicly to create read companies and people and modify people.
+The backend code esposes a REST API publicly to create and read companies and people and modify people.
 
-The backend is built in NodeJS. I used [express framework](https://expressjs.com/) to create API endpoints.
+The backend is built in [NodeJS](https://nodejs.org/en/). I used [express framework](https://expressjs.com/) to create API endpoints.
 
 In the backend code I wrote tests in [Mocha](https://mochajs.org/) test runner with [Chai](https://www.chaijs.com/) assertion library. I wrote integration tests, which test the API functions together with the database. The functions are so simple and directly read and write from and to the database that I didn't find it important to write unit tests for them.
 
